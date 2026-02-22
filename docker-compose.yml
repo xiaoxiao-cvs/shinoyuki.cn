@@ -1,0 +1,58 @@
+# shinoyuki.cn 主服务器编排
+# 包含：Homepage + Glances + Home Assistant
+# 反向代理由宝塔面板管理，以下为各服务的本地监听端口
+#
+# 端口清单（宝塔反代配置用）：
+#   Homepage :       39510
+#   Glances  :       39511
+#   Home Assistant :  39512
+
+services:
+  # ============================================
+  # Homepage - 个人导航仪表盘
+  # 宝塔反代 → 127.0.0.1:39510
+  # ============================================
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:39510:3000
+    volumes:
+      - ./config/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: shinoyuki.cn,127.0.0.1:39510
+      TZ: Asia/Shanghai
+
+  # ============================================
+  # Glances - 主服务器系统监控
+  # 宝塔反代 → 127.0.0.1:39511（可选，也可不暴露）
+  # ============================================
+  glances:
+    image: nicolargo/glances:latest-full
+    container_name: glances
+    restart: unless-stopped
+    environment:
+      - GLANCES_OPT=-w --bind 0.0.0.0 -p 39511
+      - TZ=Asia/Shanghai
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/glances/glances.conf:/etc/glances/glances.conf:ro
+    pid: host
+    network_mode: host
+
+  # ============================================
+  # Home Assistant - 智能家居中控（联动米家）
+  # 宝塔反代 → 127.0.0.1:39512
+  # ============================================
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./data/homeassistant:/config
+      - ./config/homeassistant/configuration.yaml:/config/configuration.yaml:ro
+    environment:
+      - TZ=Asia/Shanghai

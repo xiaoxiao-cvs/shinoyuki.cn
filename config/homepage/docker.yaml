@@ -1,0 +1,5 @@
+# Docker 集成配置（可选）
+# 如果需要在 Homepage 中显示 Docker 容器状态，取消下面的注释
+
+# my-docker:
+#   socket: /var/run/docker.sock

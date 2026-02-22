@@ -1,0 +1,17 @@
+# 副服务器 / 洛杉矶VPS 部署 Glances
+# 在远程服务器上单独运行 Glances 提供监控数据
+
+services:
+  glances:
+    image: nicolargo/glances:latest-full
+    container_name: glances
+    restart: unless-stopped
+    ports:
+      - 39511:61208
+    environment:
+      - GLANCES_OPT=-w
+      - TZ=Asia/Shanghai
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    pid: host
+    network_mode: host

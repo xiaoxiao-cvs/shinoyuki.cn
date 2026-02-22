@@ -1,0 +1,14 @@
+# Home Assistant 基础配置
+# 修改默认端口为 39512
+
+homeassistant:
+  name: 筱筱的小窝
+  unit_system: metric
+  temperature_unit: C
+  time_zone: Asia/Shanghai
+
+http:
+  server_port: 39512
+
+# 默认集成
+default_config:

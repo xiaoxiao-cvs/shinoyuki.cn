@@ -1,0 +1,38 @@
+# 书签 - 常用网站快捷入口
+- 开发工具:
+    - GitHub:
+        - icon: github.png
+          href: https://github.com/xiaoxiao-cvs
+          description: 我的代码仓库
+
+    - VS Code:
+        - icon: vscode.png
+          href: https://vscode.dev
+          description: 在线编辑器
+
+    - Docker Hub:
+        - icon: docker.png
+          href: https://hub.docker.com
+          description: 容器镜像
+
+- 常用资源:
+    - ChatGPT:
+        - icon: openai.png
+          href: https://chat.openai.com
+          description: AI 助手
+
+    - Claude:
+        - icon: claude.png
+          href: https://claude.ai
+          description: AI 助手
+
+- 社交媒体:
+    - Bilibili:
+        - icon: bilibili.png
+          href: https://www.bilibili.com
+          description: 视频平台
+
+    - Twitter:
+        - icon: twitter.png
+          href: https://twitter.com
+          description: 社交平台

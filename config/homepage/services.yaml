@@ -1,0 +1,133 @@
+# ============================================
+# 服务器监控（Glances 小组件）
+# ============================================
+- 服务器监控:
+    - 主服务器 CPU:
+        widget:
+          type: glances
+          url: http://127.0.0.1:39511
+          version: 4
+          metric: cpu
+          chart: true
+
+    - 主服务器内存:
+        widget:
+          type: glances
+          url: http://127.0.0.1:39511
+          version: 4
+          metric: memory
+          chart: true
+
+    - 主服务器磁盘:
+        widget:
+          type: glances
+          url: http://127.0.0.1:39511
+          version: 4
+          metric: fs:/
+
+    - 副服务器 CPU:
+        widget:
+          type: glances
+          url: http://副服务器IP:39511
+          version: 4
+          metric: cpu
+          chart: true
+
+    - 副服务器内存:
+        widget:
+          type: glances
+          url: http://副服务器IP:39511
+          version: 4
+          metric: memory
+          chart: true
+
+    - 副服务器磁盘:
+        widget:
+          type: glances
+          url: http://副服务器IP:39511
+          version: 4
+          metric: fs:/
+
+    - 洛杉矶VPS CPU:
+        widget:
+          type: glances
+          url: http://洛杉矶VPS_IP:39511
+          version: 4
+          metric: cpu
+          chart: true
+
+    - 洛杉矶VPS 内存:
+        widget:
+          type: glances
+          url: http://洛杉矶VPS_IP:39511
+          version: 4
+          metric: memory
+          chart: true
+
+    - 洛杉矶VPS 网络:
+        widget:
+          type: glances
+          url: http://洛杉矶VPS_IP:39511
+          version: 4
+          metric: network:eth0
+          chart: true
+
+# ============================================
+# 小窝状态（Home Assistant 联动米家）
+# ============================================
+- 小窝状态:
+    - Home Assistant:
+        icon: home-assistant.png
+        href: https://ha.shinoyuki.cn
+        description: 智能家居中控
+        widget:
+          type: homeassistant
+          url: http://127.0.0.1:39512
+          key: {{HOMEPAGE_VAR_HA_TOKEN}}           # 在 .env 中设置
+          custom:
+            - state: sensor.temperature            # 室内温度（米家温湿度传感器）
+              label: 室温
+            - state: sensor.humidity               # 室内湿度
+              label: 湿度
+            - template: "{{ states.light|selectattr('state','equalto','on')|list|length }}"
+              label: 开灯数
+            - template: "{{ states.switch|selectattr('state','equalto','on')|list|length }}"
+              label: 开关数
+
+    - GitHub 动态:
+        icon: github.png
+        href: https://github.com/xiaoxiao-cvs
+        description: 最近的开源活动
+        widget:
+          type: customapi
+          url: https://api.github.com/users/xiaoxiao-cvs/events?per_page=1
+          headers:
+            Accept: application/vnd.github.v3+json
+          refreshInterval: 60000
+          mappings:
+            - field: 0.type
+              label: 最近活动
+              format: text
+            - field: 0.repo.name
+              label: 仓库
+              format: text
+
+# ============================================
+# 我的服务
+# ============================================
+- 我的服务:
+    # 按需添加你部署的其他服务
+    - Portainer:
+        icon: portainer.png
+        href: https://portainer.shinoyuki.cn
+        description: Docker 容器管理
+
+    - Home Assistant:
+        icon: home-assistant.png
+        href: https://ha.shinoyuki.cn
+        description: 智能家居
+
+    - Glances 主服务器:
+        icon: glances.png
+        href: http://主服务器IP:39511
+        description: 系统监控面板

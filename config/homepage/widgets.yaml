@@ -1,0 +1,31 @@
+# 顶部信息栏小组件
+- search:
+    provider: google
+    target: _blank
+    focus: true
+
+- greeting:
+    text_size: xl
+    text: 欢迎回来，筱筱
+
+- datetime:
+    text_size: l
+    format:
+      dateStyle: long
+      timeStyle: short
+      hour12: false
+
+- openmeteo:
+    label: 天气
+    latitude: 39.90         # ← 替换为你所在城市的纬度
+    longitude: 116.40       # ← 替换为你所在城市的经度
+    timezone: Asia/Shanghai
+    units: metric
+    cache: 5
+
+- resources:
+    label: 本机
+    cpu: true
+    memory: true
+    disk: /
+    expanded: true

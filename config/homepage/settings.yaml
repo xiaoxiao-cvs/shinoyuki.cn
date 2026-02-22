@@ -1,0 +1,24 @@
+# 全局设置
+title: 筱筱的小窝
+language: zh-CN
+theme: dark
+color: slate
+
+background:
+  image: https://images.unsplash.com/photo-1544077960-604201fe74bc?w=1920
+  blur: sm
+  opacity: 50
+
+layout:
+  服务器监控:
+    style: row
+    columns: 3
+  小窝状态:
+    style: row
+    columns: 2
+  我的服务:
+    style: row
+    columns: 3
+  常用链接:
+    style: row
+    columns: 4
